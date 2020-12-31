@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="机器学习常规流程   评估方法 留出法  直接将数据集 $D$ 划分为训练集 $S$ 和测试集 $T$。  交叉验证法  $k$ 折交叉验证，如图为 10 折交叉验证。 若 $k &#x3D; m$，也称为留一法。   自助法  从数据集 $D$ 中随机选择 $m$ 次，组成数据集 $D’$。 每个样本在 $m$ 次采样中始终不被采到的概率为$$\lim _{m \mapsto \infty}\left(1">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="机器学习常规流程  评估方法 留出法  直接将数据集 $D$ 划分为训练集 $S$ 和测试集 $T$。  交叉验证法  $k$ 折交叉验证，如图为 10 折交叉验证。 若 $k &#x3D; m$，也称为留一法。   自助法  从数据集 $D$ 中随机选择 $m$ 次，组成数据集 $D’$。 每个样本在 $m$ 次采样中始终不被采到的概率为  \lim _{m \mapsto \infty}\left(1-">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="ZhuCode">
 <meta property="og:url" content="http://example.com/2020/12/31/1.%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="机器学习常规流程   评估方法 留出法  直接将数据集 $D$ 划分为训练集 $S$ 和测试集 $T$。  交叉验证法  $k$ 折交叉验证，如图为 10 折交叉验证。 若 $k &#x3D; m$，也称为留一法。   自助法  从数据集 $D$ 中随机选择 $m$ 次，组成数据集 $D’$。 每个样本在 $m$ 次采样中始终不被采到的概率为$$\lim _{m \mapsto \infty}\left(1">
-<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ZhuCode">
+<meta property="og:description" content="机器学习常规流程  评估方法 留出法  直接将数据集 $D$ 划分为训练集 $S$ 和测试集 $T$。  交叉验证法  $k$ 折交叉验证，如图为 10 折交叉验证。 若 $k &#x3D; m$，也称为留一法。   自助法  从数据集 $D$ 中随机选择 $m$ 次，组成数据集 $D’$。 每个样本在 $m$ 次采样中始终不被采到的概率为  \lim _{m \mapsto \infty}\left(1-">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.postimg.cc/zGBy6vv1/screenshot-9.png">
 <meta property="og:image" content="https://i.postimg.cc/9Xy9x2H5/53cc8845639f9bd1.png">
 <meta property="og:image" content="https://i.postimg.cc/L6SCtKXP/screenshot-9.png">
@@ -24,79 +38,176 @@
 <meta property="og:image" content="https://i.postimg.cc/13B20CdX/screenshot-9.png">
 <meta property="article:published_time" content="2020-12-31T06:28:15.255Z">
 <meta property="article:modified_time" content="2020-12-31T06:28:15.255Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Zhu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.postimg.cc/zGBy6vv1/screenshot-9.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<link rel="canonical" href="http://example.com/2020/12/31/1.%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-<meta name="generator" content="Hexo 5.3.0"></head>
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
+  <title> | ZhuCode</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
-</header>
 
-      <div class="outer">
-        <section id="main"><article id="post-1.模型的评估与选择" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/12/31/1.%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" class="article-date">
-  <time class="dt-published" datetime="2020-12-31T06:28:15.255Z" itemprop="datePublished">2020-12-31</time>
-</a>
-    
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ZhuCode</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
   </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="机器学习常规流程"><a href="#机器学习常规流程" class="headerlink" title="机器学习常规流程"></a><strong>机器学习常规流程</strong></h1><img src="https://i.postimg.cc/zGBy6vv1/screenshot-9.png"  />
 
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/31/1.%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhuCode">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-31 14:28:15" itemprop="dateCreated datePublished" datetime="2020-12-31T14:28:15+08:00">2020-12-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="机器学习常规流程"><a href="#机器学习常规流程" class="headerlink" title="机器学习常规流程"></a><strong>机器学习常规流程</strong></h1><p><img src="https://i.postimg.cc/zGBy6vv1/screenshot-9.png"  /></p>
 <hr>
 <h2 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a><strong>评估方法</strong></h2><ul>
 <li>留出法</li>
@@ -112,11 +223,12 @@
 <li>自助法</li>
 </ul>
 <p>从数据集 $D$ 中随机选择 $m$ 次，组成数据集 $D’$。</p>
-<p>每个样本在 $m$ 次采样中始终不被采到的概率为<br>$$<br>\lim _{m \mapsto \infty}\left(1-\frac{1}{m}\right)^{m} \mapsto \frac{1}{e} \approx 0.368<br>$$</p>
-<ul>
+<p>每个样本在 $m$ 次采样中始终不被采到的概率为</p>
+<script type="math/tex; mode=display">
+\lim _{m \mapsto \infty}\left(1-\frac{1}{m}\right)^{m} \mapsto \frac{1}{e} \approx 0.368</script><ul>
 <li>增加验证集</li>
 </ul>
-<p><img src="https://i.postimg.cc/L6SCtKXP/screenshot-9.png"></p>
+<p><img src="https://i.postimg.cc/L6SCtKXP/screenshot-9.png" alt=""></p>
 <h1 id="二分类度量"><a href="#二分类度量" class="headerlink" title="二分类度量"></a><strong>二分类度量</strong></h1><ul>
 <li>二分类结果混淆矩阵</li>
 </ul>
@@ -124,25 +236,25 @@
 <ul>
 <li>精度 $Accuracy$</li>
 </ul>
-<p>$$<br>Accuracy = \frac{TP+TN}{TP+TN+FP+FN}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+Accuracy = \frac{TP+TN}{TP+TN+FP+FN}</script><ul>
 <li>查准率 $Precision$</li>
 </ul>
-<p>$$<br>Precision = \frac{TP}{TP+FP}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+Precision = \frac{TP}{TP+FP}</script><ul>
 <li>查全率 $Recall$</li>
 </ul>
-<p>$$<br>Recall = \frac{TP}{TP+FN}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+Recall = \frac{TP}{TP+FN}</script><ul>
 <li>$F1$ 分数</li>
 </ul>
-<p>$$<br>F 1=\frac{2 \times P \times R}{P+R}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+F 1=\frac{2 \times P \times R}{P+R}</script><ul>
 <li>$P$-$R$ 曲线</li>
 </ul>
 <p>按预测结果对样例进行排序，正例概率越大的排越前，依次取每种分类结果作为阈值。</p>
 <p>平衡点（$BEP$）表示 $P = R$。</p>
-<p><img src="https://i.postimg.cc/sxf395R2/2ee7e12f1e0ebf53.png"></p>
+<p><img src="https://i.postimg.cc/sxf395R2/2ee7e12f1e0ebf53.png" alt=""></p>
 <h1 id="多分类度量"><a href="#多分类度量" class="headerlink" title="多分类度量"></a><strong>多分类度量</strong></h1><ul>
 <li>$Macro$ 方法</li>
 </ul>
@@ -150,35 +262,41 @@
 <ul>
 <li>$Micro$ 方法</li>
 </ul>
-<p>先将各类别的 $Precision$、$Recall$ 累加，然后求 $F_1$。<br>$$<br>Accuracy = Micro\text{-}Precision = Micro\text{-}Recall =Micro\text{-}F1<br>$$</p>
-<h1 id="ROC-曲线-和-AUC"><a href="#ROC-曲线-和-AUC" class="headerlink" title="$ROC$曲线 和 $AUC$"></a><strong>$ROC$曲线 和 $AUC$</strong></h1><ul>
+<p>先将各类别的 $Precision$、$Recall$ 累加，然后求 $F_1$。</p>
+<script type="math/tex; mode=display">
+Accuracy = Micro\text{-}Precision = Micro\text{-}Recall =Micro\text{-}F1</script><h1 id="ROC-曲线-和-AUC"><a href="#ROC-曲线-和-AUC" class="headerlink" title="$ROC$曲线 和 $AUC$"></a><strong>$ROC$曲线 和 $AUC$</strong></h1><ul>
 <li>真正例率 $TRP$ 和假正例率 $FPR$ </li>
 </ul>
-<p>$$<br>{TPR}=\frac{T P}{T P+F N}\<br>{FPR}=\frac{F P}{F P+T N}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+{TPR}=\frac{T P}{T P+F N}\\
+{FPR}=\frac{F P}{F P+T N}</script><ul>
 <li>${ROC}$ 曲线和 ${AUC}$</li>
 </ul>
 <p>按预测结果对样例进行排序，正例概率越小的排越前，依次取每种分类结果作为阈值。</p>
-<p><img src="https://i.postimg.cc/gJmpm3jK/21bf1db03e28eaff.png" alt="Markdown"><br>$$<br>{AUC}=\frac{1}{2} \sum_{i=1}^{m-1}\left(x_{i+1}-x_{i}\right) \cdot\left(y_{i}+y_{i+1}\right)<br>$$</p>
-<h1 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a><strong>偏差与方差</strong></h1><ul>
+<p><img src="https://i.postimg.cc/gJmpm3jK/21bf1db03e28eaff.png" alt="Markdown"></p>
+<script type="math/tex; mode=display">
+{AUC}=\frac{1}{2} \sum_{i=1}^{m-1}\left(x_{i+1}-x_{i}\right) \cdot\left(y_{i}+y_{i+1}\right)</script><h1 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a><strong>偏差与方差</strong></h1><ul>
 <li>偏差 $Bias^2$</li>
 </ul>
-<p>期望输出与真实标记的误差，即模型的准确性。<br>$$<br>\operatorname{bias}^{2}(\boldsymbol{x})=(\overline{f}(\boldsymbol{x})-y)^{2}<br>$$</p>
-<ul>
+<p>期望输出与真实标记的误差，即模型的准确性。</p>
+<script type="math/tex; mode=display">
+\operatorname{bias}^{2}(\boldsymbol{x})=(\overline{f}(\boldsymbol{x})-y)^{2}</script><ul>
 <li>方差 $Variance$</li>
 </ul>
-<p>模型每次输出与期望输出的误差，即模型的稳定性，可理解为针对不同训练集产生的模型区别大小。<br>$$<br>\operatorname{var}(\boldsymbol{x})=\mathbb{E}_{D}\left[(f(\boldsymbol{x} ; D)-\overline{f}(\boldsymbol{x}))^{2}\right]<br>$$</p>
-<ul>
+<p>模型每次输出与期望输出的误差，即模型的稳定性，可理解为针对不同训练集产生的模型区别大小。</p>
+<script type="math/tex; mode=display">
+\operatorname{var}(\boldsymbol{x})=\mathbb{E}_{D}\left[(f(\boldsymbol{x} ; D)-\overline{f}(\boldsymbol{x}))^{2}\right]</script><ul>
 <li>噪声 $\varepsilon^{2}$</li>
 </ul>
-<p>标记与真实标记的误差，表示期望泛化误差的下界。<br>$$<br>\varepsilon^{2}=\mathbb{E}<em>{D}\left[\left(y</em>{D}-y\right)^{2}\right]<br>$$</p>
-<p><img src="https://i.postimg.cc/FsfykTbS/screenshot-9.png"></p>
+<p>标记与真实标记的误差，表示期望泛化误差的下界。</p>
+<script type="math/tex; mode=display">
+\varepsilon^{2}=\mathbb{E}_{D}\left[\left(y_{D}-y\right)^{2}\right]</script><p><img src="https://i.postimg.cc/FsfykTbS/screenshot-9.png" alt=""></p>
 <ul>
 <li>泛化误差</li>
 </ul>
-<p>$$<br>E(f ; D)=\operatorname{bias}^{2}(\boldsymbol{x})+\operatorname{var}(\boldsymbol{x})+\varepsilon^{2}<br>$$</p>
-<p><img src="https://i.postimg.cc/MHLgMB6N/65be06ed25d2bcef.png" alt="Markdown"></p>
-<h1 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a><strong>模型选择</strong></h1><p><img src="https://i.postimg.cc/13B20CdX/screenshot-9.png"></p>
+<script type="math/tex; mode=display">
+E(f ; D)=\operatorname{bias}^{2}(\boldsymbol{x})+\operatorname{var}(\boldsymbol{x})+\varepsilon^{2}</script><p><img src="https://i.postimg.cc/MHLgMB6N/65be06ed25d2bcef.png" alt="Markdown"></p>
+<h1 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a><strong>模型选择</strong></h1><p><img src="https://i.postimg.cc/13B20CdX/screenshot-9.png" alt=""></p>
 <blockquote>
 <p>参考：</p>
 <p>周志华《机器学习》</p>
@@ -186,121 +304,210 @@
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html">https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html</a></p>
 </blockquote>
 
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/31/zhuzhuzhu/" rel="prev" title="zhuzhuzhu">
+      <i class="fa fa-chevron-left"></i> zhuzhuzhu
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/31/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%A7%84%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">机器学习常规流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">评估方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E7%B1%BB%E5%BA%A6%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">二分类度量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%E5%BA%A6%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">多分类度量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ROC-%E6%9B%B2%E7%BA%BF-%E5%92%8C-AUC"><span class="nav-number">4.</span> <span class="nav-text">$ROC$曲线 和 $AUC$</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%81%8F%E5%B7%AE%E4%B8%8E%E6%96%B9%E5%B7%AE"><span class="nav-number">5.</span> <span class="nav-text">偏差与方差</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="nav-number">6.</span> <span class="nav-text">模型选择</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="220" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/22/" rel="tag">22</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li></ul>
+          </canvas>
+          </div>
+      </div>
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/12/31/1.%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" data-id="ckjcgvqqz0000y7dohq7y5vz9" data-title="" class="article-share-link">Share</a>
-      
-      
-      
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
     </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2020/12/31/2.%E5%9B%9E%E5%BD%92/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
-    </a>
-  
-</nav>
 
   
-</article>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li></ul>
-    </div>
-  </div>
+<script src="/js/schemes/pisces.js"></script>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/12/31/1.%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/31/2.%E5%9B%9E%E5%BD%92/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/31/zhuzhuzhu/">zhuzhuzhu</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/31/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<script src="/js/next-boot.js"></script>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2020 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
 </body>
 </html>
