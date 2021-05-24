@@ -183,7 +183,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/044.%20Wildcard%20Matching/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/088.%20Merge%20Sorted%20Array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -197,7 +197,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/044.%20Wildcard%20Matching/" class="post-title-link" itemprop="url">LeetCode 44. Wildcard Matching</a>
+            <a href="/2020/11/30/088.%20Merge%20Sorted%20Array/" class="post-title-link" itemprop="url">LeetCode 88. Merge Sorted Array</a>
         </h2>
 
         <div class="post-meta">
@@ -207,7 +207,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:18:04" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:04+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:19:32" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:32+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -237,17 +237,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement wildcard pattern matching with support for <code>&#39;?&#39;</code> and <code>&#39;*&#39;</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;?&#39; Matches any single character.</span><br><span class="line">&#39;*&#39; Matches any sequence of characters (including the empty sequence).</span><br></pre></td></tr></table></figure>
-<p>The matching should cover the <strong>entire</strong> input string (not partial).</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given two sorted integer arrays <code>nums1</code> and <code>nums2</code>, merge <code>nums2</code> into <code>nums1</code> as one sorted array.</p>
 <p><strong>Note:</strong></p>
 <ul>
-<li><code>s</code> could be empty and contains only lowercase letters <code>a-z</code>.</li>
-<li><code>p</code> could be empty and contains only lowercase letters <code>a-z</code>, and characters like <code>?</code> or <code>*</code>.</li>
+<li>The number of elements initialized in <code>nums1</code> and <code>nums2</code> are <code>m</code> and <code>n</code> respectively.</li>
+<li>You may assume that <code>nums1</code> has enough space (size that is greater or equal to <code>m + n</code>) to hold additional elements from <code>nums2</code>.</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/044.%20Wildcard%20Matching/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/088.%20Merge%20Sorted%20Array/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -271,7 +269,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/043.%20Multiply%20Strings/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/087.%20Scramble%20String/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -285,7 +283,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/043.%20Multiply%20Strings/" class="post-title-link" itemprop="url">LeetCode 43. Multiply Strings</a>
+            <a href="/2020/11/30/087.%20Scramble%20String/" class="post-title-link" itemprop="url">LeetCode 87. Scramble String</a>
         </h2>
 
         <div class="post-meta">
@@ -295,7 +293,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:18:02" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:02+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:19:30" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:30+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -325,10 +323,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given two non-negative integers <code>num1</code> and <code>num2</code> represented as strings, return the product of <code>num1</code> and <code>num2</code>, also represented as a string.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a string <code>s1</code>, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.</p>
+<p>Below is one possible representation of <code>s1 = &quot;great&quot;</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    great</span><br><span class="line">   &#x2F;    \</span><br><span class="line">  gr    eat</span><br><span class="line"> &#x2F; \    &#x2F;  \</span><br><span class="line">g   r  e   at</span><br><span class="line">           &#x2F; \</span><br><span class="line">          a   t</span><br></pre></td></tr></table></figure>
+<p>To scramble the string, we may choose any non-leaf node and swap its two children.</p>
+<p>For example, if we choose the node <code>&quot;gr&quot;</code> and swap its two children, it produces a scrambled string <code>&quot;rgeat&quot;</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    rgeat</span><br><span class="line">   &#x2F;    \</span><br><span class="line">  rg    eat</span><br><span class="line"> &#x2F; \    &#x2F;  \</span><br><span class="line">r   g  e   at</span><br><span class="line">           &#x2F; \</span><br><span class="line">          a   t</span><br></pre></td></tr></table></figure>
+<p>We say that <code>&quot;rgeat&quot;</code> is a scrambled string of <code>&quot;great&quot;</code>.</p>
+<p>Similarly, if we continue to swap the children of nodes <code>&quot;eat&quot;</code> and <code>&quot;at&quot;</code>, it produces a scrambled string <code>&quot;rgtae&quot;</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    rgtae</span><br><span class="line">   &#x2F;    \</span><br><span class="line">  rg    tae</span><br><span class="line"> &#x2F; \    &#x2F;  \</span><br><span class="line">r   g  ta  e</span><br><span class="line">       &#x2F; \</span><br><span class="line">      t   a</span><br></pre></td></tr></table></figure>
+<p>We say that <code>&quot;rgtae&quot;</code> is a scrambled string of <code>&quot;great&quot;</code>.</p>
+<p>Given two strings <code>s1</code> and <code>s2</code> of the same length, determine if <code>s2</code> is a scrambled string of <code>s1</code>.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/043.%20Multiply%20Strings/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/087.%20Scramble%20String/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -352,7 +360,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/042.%20Trapping%20Rain%20Water/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/086.%20Partition%20List/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -366,7 +374,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/042.%20Trapping%20Rain%20Water/" class="post-title-link" itemprop="url">LeetCode 42. Trapping Rain Water</a>
+            <a href="/2020/11/30/086.%20Partition%20List/" class="post-title-link" itemprop="url">LeetCode 86. Partition List</a>
         </h2>
 
         <div class="post-meta">
@@ -376,7 +384,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:18:00" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:00+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:19:28" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:28+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -406,12 +414,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given <code>n</code> non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.</p>
-<p><img src="https://assets.leetcode.com/uploads/2018/10/22/rainwatertrap.png" alt="img"></p>
-<p>The above elevation map is represented by array <code>[0,1,0,2,1,0,1,3,2,1,2,1]</code>. In this case, 6 units of rain water (blue section) are being trapped. <strong>Thanks Marcos</strong> for contributing this image!</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a linked list and a value <code>x</code>, partition it such that all nodes less than <code>x</code> come before nodes greater than or equal to <code>x</code>.</p>
+<p>You should preserve the original relative order of the nodes in each of the two partitions.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/042.%20Trapping%20Rain%20Water/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/086.%20Partition%20List/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -435,7 +442,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/041.%20First%20Missing%20Positive/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/085.%20Maximal%20Rectangle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -449,7 +456,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/041.%20First%20Missing%20Positive/" class="post-title-link" itemprop="url">LeetCode 41. First Missing Positive</a>
+            <a href="/2020/11/30/085.%20Maximal%20Rectangle/" class="post-title-link" itemprop="url">LeetCode 85. Maximal Rectangle</a>
         </h2>
 
         <div class="post-meta">
@@ -459,7 +466,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:17:58" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:58+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:19:26" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:26+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -489,10 +496,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given an unsorted integer array, find the smallest missing positive integer.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a 2D binary matrix filled with 0’s and 1’s, find the largest rectangle containing only 1’s and return its area.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/041.%20First%20Missing%20Positive/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/085.%20Maximal%20Rectangle/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -516,7 +523,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/040.%20Combination%20Sum%20II/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/084.%20Largest%20Rectangle%20in%20Histogram/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -530,7 +537,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/040.%20Combination%20Sum%20II/" class="post-title-link" itemprop="url">LeetCode 40. Combination Sum II</a>
+            <a href="/2020/11/30/084.%20Largest%20Rectangle%20in%20Histogram/" class="post-title-link" itemprop="url">LeetCode 84. Largest Rectangle in Histogram</a>
         </h2>
 
         <div class="post-meta">
@@ -540,181 +547,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:17:56" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:56+08:00">2020-11-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-26 23:58:52" itemprop="dateModified" datetime="2021-04-26T23:58:52+08:00">2021-04-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
-<p>Each number in <code>candidates</code> may only be used <strong>once</strong> in the combination.</p>
-<p><strong>Note:</strong></p>
-<ul>
-<li>All numbers (including <code>target</code>) will be positive integers.</li>
-<li>The solution set must not contain duplicate combinations.</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/30/040.%20Combination%20Sum%20II/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/039.%20Combination%20Sum/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhuCode">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/30/039.%20Combination%20Sum/" class="post-title-link" itemprop="url">LeetCode 39. Combination Sum</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-30 20:17:54" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:54+08:00">2020-11-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-26 23:58:38" itemprop="dateModified" datetime="2021-04-26T23:58:38+08:00">2021-04-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a <strong>set</strong> of candidate numbers (<code>candidates</code>) <strong>(without duplicates)</strong> and a target number (<code>target</code>), find all unique combinations in <code>candidates</code> where the candidate numbers sums to <code>target</code>.</p>
-<p>The <strong>same</strong> repeated number may be chosen from <code>candidates</code> unlimited number of times.</p>
-<p><strong>Note:</strong></p>
-<ul>
-<li>All numbers (including <code>target</code>) will be positive integers.</li>
-<li>The solution set must not contain duplicate combinations.</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/30/039.%20Combination%20Sum/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/038.%20Count%20and%20Say/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhuCode">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/30/038.%20Count%20and%20Say/" class="post-title-link" itemprop="url">LeetCode 38. Count and Say</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-30 20:17:52" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:52+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:19:24" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:24+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -744,14 +577,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>The count-and-say sequence is the sequence of integers with the first five terms as following:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.     1</span><br><span class="line">2.     11</span><br><span class="line">3.     21</span><br><span class="line">4.     1211</span><br><span class="line">5.     111221</span><br></pre></td></tr></table></figure>
-<p><code>1</code> is read off as <code>&quot;one 1&quot;</code> or <code>11</code>.<br><code>11</code> is read off as <code>&quot;two 1s&quot;</code> or <code>21</code>.<br><code>21</code> is read off as <code>&quot;one 2</code>, then <code>one 1&quot;</code> or <code>1211</code>.</p>
-<p>Given an integer <code>n</code> where 1 ≤ <code>n</code> ≤ 30, generate the <em>n</em>th term of the count-and-say sequence.</p>
-<p>Note: Each term of the sequence of integers will be represented as a string.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given <code>n</code> non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/12/histogram.png" alt="img"></p>
+<p>Above is a histogram where width of each bar is 1, given height = <code>[2,1,5,6,2,3]</code>.</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/12/histogram_area.png" alt="img"></p>
+<p>The largest rectangle is shown in the shaded area, which has area = <code>10</code> unit.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/038.%20Count%20and%20Say/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/084.%20Largest%20Rectangle%20in%20Histogram/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -775,7 +608,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/037.%20Sudoku%20Solver/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/083.%20Remove%20Duplicates%20from%20Sorted%20List/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -789,7 +622,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/037.%20Sudoku%20Solver/" class="post-title-link" itemprop="url">LeetCode 37. Sudoku Solver</a>
+            <a href="/2020/11/30/083.%20Remove%20Duplicates%20from%20Sorted%20List/" class="post-title-link" itemprop="url">LeetCode 83. Remove Duplicates from Sorted List</a>
         </h2>
 
         <div class="post-meta">
@@ -799,7 +632,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:17:50" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:50+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:19:22" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:22+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -829,17 +662,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Write a program to solve a Sudoku puzzle by filling the empty cells.</p>
-<p>A sudoku solution must satisfy <strong>all of the following rules</strong>:</p>
-<ol>
-<li>Each of the digits <code>1-9</code> must occur exactly once in each row.</li>
-<li>Each of the digits <code>1-9</code> must occur exactly once in each column.</li>
-<li>Each of the the digits <code>1-9</code> must occur exactly once in each of the 9 <code>3x3</code> sub-boxes of the grid.</li>
-</ol>
-<p>Empty cells are indicated by the character <code>&#39;.&#39;</code>.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a sorted linked list, delete all duplicates such that each element appear only <strong>once</strong>.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/037.%20Sudoku%20Solver/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/083.%20Remove%20Duplicates%20from%20Sorted%20List/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -863,7 +689,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/036.%20Valid%20Sudoku/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/082.%20Remove%20Duplicates%20from%20Sorted%20List%20II/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -877,7 +703,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/036.%20Valid%20Sudoku/" class="post-title-link" itemprop="url">LeetCode 36. Valid Sudoku</a>
+            <a href="/2020/11/30/082.%20Remove%20Duplicates%20from%20Sorted%20List%20II/" class="post-title-link" itemprop="url">LeetCode 82. Remove Duplicates from Sorted List II</a>
         </h2>
 
         <div class="post-meta">
@@ -887,7 +713,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:17:48" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:48+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:19:20" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:20+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -917,18 +743,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Determine if a <code>9x9</code> Sudoku board is valid. Only the filled cells need to be validated <strong>according to the following rules</strong>:</p>
-<ol>
-<li>Each row must contain the digits <code>1-9</code> without repetition.</li>
-<li>Each column must contain the digits <code>1-9</code> without repetition.</li>
-<li>Each of the 9 <code>3x3</code> sub-boxes of the grid must contain the digits <code>1-9</code> without repetition.</li>
-</ol>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png" alt="img"></p>
-<p>A partially filled sudoku which is valid.</p>
-<p>The Sudoku board could be partially filled, where empty cells are filled with the character <code>&#39;.&#39;</code>.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only <strong>distinct</strong> numbers from the original list.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/036.%20Valid%20Sudoku/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/082.%20Remove%20Duplicates%20from%20Sorted%20List%20II/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -952,7 +770,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/035.%20Search%20Insert%20Position/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/081.%20Search%20in%20Rotated%20Sorted%20Array%20II/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -966,7 +784,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/035.%20Search%20Insert%20Position/" class="post-title-link" itemprop="url">LeetCode 35. Search Insert Position</a>
+            <a href="/2020/11/30/081.%20Search%20in%20Rotated%20Sorted%20Array%20II/" class="post-title-link" itemprop="url">LeetCode 81. Search in Rotated Sorted Array II</a>
         </h2>
 
         <div class="post-meta">
@@ -976,7 +794,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:17:46" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:46+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:19:18" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:18+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1006,11 +824,176 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.</p>
-<p>You may assume no duplicates in the array.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p>
+<p>(i.e., <code>[0,0,1,2,2,5,6]</code> might become <code>[2,5,6,0,0,1,2]</code>).</p>
+<p>You are given a target value to search. If found in the array return <code>true</code>, otherwise return <code>false</code>.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/035.%20Search%20Insert%20Position/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/081.%20Search%20in%20Rotated%20Sorted%20Array%20II/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/080.%20Remove%20Duplicates%20from%20Sorted%20Array%20II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhuCode">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/30/080.%20Remove%20Duplicates%20from%20Sorted%20Array%20II/" class="post-title-link" itemprop="url">LeetCode 80. Remove Duplicates from Sorted Array II</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-30 20:19:16" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:16+08:00">2020-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-26 23:54:54" itemprop="dateModified" datetime="2021-04-26T23:54:54+08:00">2021-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a sorted array <code>nums</code>, remove the duplicates <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> such that duplicates appeared at most <strong>twice</strong> and return the new length.</p>
+<p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array in-place</strong> with $O(1)$ extra memory.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/30/080.%20Remove%20Duplicates%20from%20Sorted%20Array%20II/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/079.%20Word%20Search/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhuCode">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/30/079.%20Word%20Search/" class="post-title-link" itemprop="url">LeetCode 79. Word Search</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-30 20:19:14" itemprop="dateCreated datePublished" datetime="2020-11-30T20:19:14+08:00">2020-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-26 23:54:54" itemprop="dateModified" datetime="2021-04-26T23:54:54+08:00">2021-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a 2D board and a word, find if the word exists in the grid.</p>
+<p>The word can be constructed from letters of sequentially adjacent cell, where “adjacent” cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/30/079.%20Word%20Search/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1033,7 +1016,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1101,7 +1084,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1114,7 +1097,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1137,7 +1120,7 @@
       <div class="widget-wrap">
           <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="220" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">57</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/" rel="tag">Backtracking</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Search/" rel="tag">Binary Search</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bit-Manipulation/" rel="tag">Bit Manipulation</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bit-Manipylation/" rel="tag">Bit Manipylation</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Breadth-first-Search/" rel="tag">Breadth-first Search</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-first-Search/" rel="tag">Depth-first Search</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag">Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Divide-and-Conquer/" rel="tag">Divide and Conquer</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/" rel="tag">Dynamic Programming</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Greedy/" rel="tag">Greedy</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hash-Table/" rel="tag">Hash Table</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heap/" rel="tag">Heap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linked-List/" rel="tag">Linked List</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recursion/" rel="tag">Recursion</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sliding-Window/" rel="tag">Sliding Window</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/" rel="tag">Sort</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack/" rel="tag">Stack</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-Pointers/" rel="tag">Two Pointers</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Union-Find/" rel="tag">Union Find</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">65</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/" rel="tag">Backtracking</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Indexed-Tree/" rel="tag">Binary Indexed Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Search/" rel="tag">Binary Search</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bit-Manipulation/" rel="tag">Bit Manipulation</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Breadth-first-Search/" rel="tag">Breadth-first Search</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-first-Search/" rel="tag">Depth-first Search</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dequeue/" rel="tag">Dequeue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag">Design</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Divide-and-Conquer/" rel="tag">Divide and Conquer</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/" rel="tag">Dynamic Programming</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Greedy/" rel="tag">Greedy</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hash-Table/" rel="tag">Hash Table</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heap/" rel="tag">Heap</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Line-Sweep/" rel="tag">Line Sweep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linked-List/" rel="tag">Linked List</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recursion/" rel="tag">Recursion</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segment-Tree/" rel="tag">Segment Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sliding-Window/" rel="tag">Sliding Window</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/" rel="tag">Sort</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack/" rel="tag">Stack</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tire/" rel="tag">Tire</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Topological-Sort/" rel="tag">Topological Sort</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-Pointers/" rel="tag">Two Pointers</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Union-Find/" rel="tag">Union Find</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">1</span></li></ul>
           </canvas>
           </div>
       </div>

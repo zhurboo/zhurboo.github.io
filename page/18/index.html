@@ -183,7 +183,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/014.%20Longest%20Common%20Prefix/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/058.%20Length%20of%20Last%20Word/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -197,7 +197,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/014.%20Longest%20Common%20Prefix/" class="post-title-link" itemprop="url">LeetCode 14. Longest Common Prefix</a>
+            <a href="/2020/11/30/058.%20Length%20of%20Last%20Word/" class="post-title-link" itemprop="url">LeetCode 58. Length of Last Word</a>
         </h2>
 
         <div class="post-meta">
@@ -207,7 +207,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:17:04" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:04+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:32" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:32+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -237,11 +237,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Write a function to find the longest common prefix string amongst an array of strings.</p>
-<p>If there is no common prefix, return an empty string <code>&quot;&quot;</code>.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a string <em>s</em> consists of upper/lower-case alphabets and empty space characters <code>&#39; &#39;</code>, return the length of last word in the string.</p>
+<p>If the last word does not exist, return 0.</p>
+<p><strong>Note:</strong> A word is defined as a character sequence consists of non-space characters only.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/014.%20Longest%20Common%20Prefix/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/058.%20Length%20of%20Last%20Word/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -265,7 +266,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/013.%20Roman%20to%20Integer/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/057.%20Insert%20Interval/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -279,7 +280,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/013.%20Roman%20to%20Integer/" class="post-title-link" itemprop="url">LeetCode 13. Roman to Integer</a>
+            <a href="/2020/11/30/057.%20Insert%20Interval/" class="post-title-link" itemprop="url">LeetCode 57. Insert Interval</a>
         </h2>
 
         <div class="post-meta">
@@ -289,7 +290,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:17:02" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:02+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:30" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:30+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -319,19 +320,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Roman numerals are represented by seven different symbols: <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Symbol       Value</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure>
-<p>For example, two is written as <code>II</code> in Roman numeral, just two one’s added together. Twelve is written as, <code>XII</code>, which is simply <code>X</code> + <code>II</code>. The number twenty seven is written as <code>XXVII</code>, which is <code>XX</code> + <code>V</code> + <code>II</code>.</p>
-<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p>
-<ul>
-<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9. </li>
-<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90. </li>
-<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
-</ul>
-<p>Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a set of <strong>non-overlapping</strong> intervals, insert a new interval into the intervals (merge if necessary).</p>
+<p>You may assume that the intervals were initially sorted according to their start times.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/013.%20Roman%20to%20Integer/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/057.%20Insert%20Interval/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -355,7 +348,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/012.%20Integer%20to%20Roman/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/056.%20Merge%20Intervals/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -369,7 +362,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/012.%20Integer%20to%20Roman/" class="post-title-link" itemprop="url">LeetCode 12. Integer to Roman</a>
+            <a href="/2020/11/30/056.%20Merge%20Intervals/" class="post-title-link" itemprop="url">LeetCode 56. Merge Intervals</a>
         </h2>
 
         <div class="post-meta">
@@ -379,7 +372,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:17:00" itemprop="dateCreated datePublished" datetime="2020-11-30T20:17:00+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:28" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:28+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -409,19 +402,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Roman numerals are represented by seven different symbols: <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Symbol       Value</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure>
-<p>For example, two is written as <code>II</code> in Roman numeral, just two one’s added together. Twelve is written as, <code>XII</code>, which is simply <code>X</code> + <code>II</code>. The number twenty seven is written as <code>XXVII</code>, which is <code>XX</code> + <code>V</code> + <code>II</code>.</p>
-<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p>
-<ul>
-<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9. </li>
-<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90. </li>
-<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
-</ul>
-<p>Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a collection of intervals, merge all overlapping intervals.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/012.%20Integer%20to%20Roman/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/056.%20Merge%20Intervals/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -445,7 +429,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/011.%20Container%20With%20Most%20Water/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/055.%20Jump%20Game/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -459,7 +443,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/011.%20Container%20With%20Most%20Water/" class="post-title-link" itemprop="url">LeetCode 11. Container With Most Water</a>
+            <a href="/2020/11/30/055.%20Jump%20Game/" class="post-title-link" itemprop="url">LeetCode 55. Jump Game</a>
         </h2>
 
         <div class="post-meta">
@@ -469,7 +453,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:16:58" itemprop="dateCreated datePublished" datetime="2020-11-30T20:16:58+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:26" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:26+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -499,13 +483,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given <code>n</code> non-negative integers <code>a1, a2, ..., an</code> , where each represents a point at coordinate <code>(i, ai)</code>. <code>n</code> vertical lines are drawn such that the two endpoints of line <code>i</code> is at <code>(i, ai)</code> and <code>(i, 0)</code>. Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
-<p><strong>Note:</strong> You may not slant the container and <code>n</code> is at least 2.</p>
-<p><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/07/17/question_11.jpg" alt="img"></p>
-<p>The above vertical lines are represented by array <code>[1,8,6,2,5,4,8,3,7]</code>. In this case, the max area of water (blue section) the container can contain is 49.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<p>Each element in the array represents your maximum jump length at that position.</p>
+<p>Determine if you are able to reach the last index.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/011.%20Container%20With%20Most%20Water/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/055.%20Jump%20Game/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -529,7 +512,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/010.%20Regular%20Expression%20Matching/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/054.%20Spiral%20Matrix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -543,7 +526,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/010.%20Regular%20Expression%20Matching/" class="post-title-link" itemprop="url">LeetCode 10. Regular Expression Matching</a>
+            <a href="/2020/11/30/054.%20Spiral%20Matrix/" class="post-title-link" itemprop="url">LeetCode 54. Spiral Matrix</a>
         </h2>
 
         <div class="post-meta">
@@ -553,7 +536,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:16:56" itemprop="dateCreated datePublished" datetime="2020-11-30T20:16:56+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:24" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:24+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -583,17 +566,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement regular expression matching with support for <code>&#39;.&#39;</code> and <code>&#39;*&#39;</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;.&#39; Matches any single character.</span><br><span class="line">&#39;*&#39; Matches zero or more of the preceding element.</span><br></pre></td></tr></table></figure>
-<p>The matching should cover the <strong>entire</strong> input string (not partial).</p>
-<p><strong>Note:</strong></p>
-<ul>
-<li><code>s</code> could be empty and contains only lowercase letters <code>a-z</code>.</li>
-<li><code>p</code> could be empty and contains only lowercase letters <code>a-z</code>, and characters like <code>.</code> or <code>*</code>.</li>
-</ul>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a matrix of <code>m</code> x <code>n</code> elements (<code>m</code> rows, <code>n</code> columns), return all elements of the matrix in spiral order.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/010.%20Regular%20Expression%20Matching/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/054.%20Spiral%20Matrix/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -617,7 +593,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/009.%20Palindrome%20Number/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/053.%20Maximum%20Subarray/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -631,7 +607,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/009.%20Palindrome%20Number/" class="post-title-link" itemprop="url">LeetCode 9. Palindrome Number</a>
+            <a href="/2020/11/30/053.%20Maximum%20Subarray/" class="post-title-link" itemprop="url">LeetCode 53. Maximum Subarray</a>
         </h2>
 
         <div class="post-meta">
@@ -641,14 +617,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:16:54" itemprop="dateCreated datePublished" datetime="2020-11-30T20:16:54+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:22" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:22+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-26 23:54:53" itemprop="dateModified" datetime="2021-04-26T23:54:53+08:00">2021-04-26</time>
+                <time title="修改时间：2021-04-26 23:54:54" itemprop="dateModified" datetime="2021-04-26T23:54:54+08:00">2021-04-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -671,10 +647,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/009.%20Palindrome%20Number/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/053.%20Maximum%20Subarray/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -698,7 +674,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/008.%20String%20to%20Integer%20(atoi)/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/052.%20N-Queens%20II/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -712,7 +688,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/008.%20String%20to%20Integer%20(atoi)/" class="post-title-link" itemprop="url">LeetCode 8. String to Integer (atoi)</a>
+            <a href="/2020/11/30/052.%20N-Queens%20II/" class="post-title-link" itemprop="url">LeetCode 52. N-Queens II</a>
         </h2>
 
         <div class="post-meta">
@@ -722,14 +698,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:16:52" itemprop="dateCreated datePublished" datetime="2020-11-30T20:16:52+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:20" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:20+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-26 23:54:53" itemprop="dateModified" datetime="2021-04-26T23:54:53+08:00">2021-04-26</time>
+                <time title="修改时间：2021-04-26 23:54:54" itemprop="dateModified" datetime="2021-04-26T23:54:54+08:00">2021-04-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -752,19 +728,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Implement <code>atoi</code> which converts a string to an integer.</p>
-<p>The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.</p>
-<p>The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.</p>
-<p>If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.</p>
-<p>If no valid conversion could be performed, a zero value is returned.</p>
-<p><strong>Note:</strong></p>
-<ul>
-<li>Only the space character <code>&#39; &#39;</code> is considered as whitespace character.</li>
-<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: $[−2^{31},  2^{31} − 1]$. If the numerical value is out of the range of representable values, INT_MAX ($2^{31} − 1$) or INT_MIN ($−2^{31}$) is returned.</li>
-</ul>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>The <code>n</code>-queens puzzle is the problem of placing <code>n</code> queens on an <code>n</code>×<code>n</code> chessboard such that no two queens attack each other.</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/12/8-queens.png" alt="img"></p>
+<p>Given an integer <code>n</code>, return the number of distinct solutions to the <code>n</code>-queens puzzle.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/008.%20String%20to%20Integer%20(atoi)/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/052.%20N-Queens%20II/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -788,7 +757,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/007.%20Reverse%20Integer/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/051.%20N-Queens/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -802,7 +771,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/007.%20Reverse%20Integer/" class="post-title-link" itemprop="url">LeetCode 7. Reverse Integer</a>
+            <a href="/2020/11/30/051.%20N-Queens/" class="post-title-link" itemprop="url">LeetCode 51. N-Queens</a>
         </h2>
 
         <div class="post-meta">
@@ -812,14 +781,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:16:50" itemprop="dateCreated datePublished" datetime="2020-11-30T20:16:50+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:18" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:18+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-26 23:54:53" itemprop="dateModified" datetime="2021-04-26T23:54:53+08:00">2021-04-26</time>
+                <time title="修改时间：2021-04-26 23:54:54" itemprop="dateModified" datetime="2021-04-26T23:54:54+08:00">2021-04-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -842,10 +811,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>The <code>n</code>-queens puzzle is the problem of placing <code>n</code> queens on an <code>n</code>×<code>n</code> chessboard such that no two queens attack each other.</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/12/8-queens.png" alt="img"></p>
+<p>Given an integer <code>n</code>, return all distinct solutions to the <code>n</code>-queens puzzle.</p>
+<p>Each solution contains a distinct board configuration of the <code>n</code>-queens’ placement, where <code>&#39;Q&#39;</code> and <code>&#39;.&#39;</code> both indicate a queen and an empty space respectively.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/007.%20Reverse%20Integer/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/051.%20N-Queens/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -869,7 +841,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/006.%20ZigZag%20Conversion/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/050.%20Pow(x,%20n)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -883,7 +855,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/006.%20ZigZag%20Conversion/" class="post-title-link" itemprop="url">LeetCode 6. ZigZag Conversion</a>
+            <a href="/2020/11/30/050.%20Pow(x,%20n)/" class="post-title-link" itemprop="url">LeetCode 50. Pow(x, n)</a>
         </h2>
 
         <div class="post-meta">
@@ -893,14 +865,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:16:48" itemprop="dateCreated datePublished" datetime="2020-11-30T20:16:48+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:16" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:16+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-26 23:54:53" itemprop="dateModified" datetime="2021-04-26T23:54:53+08:00">2021-04-26</time>
+                <time title="修改时间：2021-04-26 23:54:54" itemprop="dateModified" datetime="2021-04-26T23:54:54+08:00">2021-04-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -923,14 +895,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P   A   H   N</span><br><span class="line">A P L S I I G</span><br><span class="line">Y   I   R</span><br></pre></td></tr></table></figure>
-<p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
-<p>Write the code that will take a string and make this conversion given a number of rows:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string convert(string s, int numRows);</span><br></pre></td></tr></table></figure>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Implement <a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/valarray/pow/">pow(x, n)</a>, which calculates <code>x</code> raised to the power <code>n</code> ($x^n$).</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/006.%20ZigZag%20Conversion/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/050.%20Pow(x,%20n)/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -954,7 +922,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/005.%20Longest%20Palindromic%20Substring/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/049.%20Group%20Anagrams/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -968,7 +936,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/30/005.%20Longest%20Palindromic%20Substring/" class="post-title-link" itemprop="url">LeetCode 5. Longest Palindromic Substring</a>
+            <a href="/2020/11/30/049.%20Group%20Anagrams/" class="post-title-link" itemprop="url">LeetCode 49. Group Anagrams</a>
         </h2>
 
         <div class="post-meta">
@@ -978,14 +946,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-30 20:16:44" itemprop="dateCreated datePublished" datetime="2020-11-30T20:16:44+08:00">2020-11-30</time>
+              <time title="创建时间：2020-11-30 20:18:14" itemprop="dateCreated datePublished" datetime="2020-11-30T20:18:14+08:00">2020-11-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-26 23:54:53" itemprop="dateModified" datetime="2021-04-26T23:54:53+08:00">2021-04-26</time>
+                <time title="修改时间：2021-04-26 23:54:54" itemprop="dateModified" datetime="2021-04-26T23:54:54+08:00">2021-04-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1008,10 +976,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given a string <code>s</code>, find the longest palindromic substring in <code>s</code>. You may assume that the maximum length of <code>s</code> is 1000.</p>
+          <h1 id="题目描述-英文"><a href="#题目描述-英文" class="headerlink" title="题目描述(英文)"></a>题目描述(英文)</h1><p>Given an array of strings, group anagrams together.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/30/005.%20Longest%20Palindromic%20Substring/#more" rel="contents">
+              <a class="btn" href="/2020/11/30/049.%20Group%20Anagrams/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1034,7 +1002,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1102,7 +1070,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1115,7 +1083,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1138,7 +1106,7 @@
       <div class="widget-wrap">
           <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="220" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">57</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/" rel="tag">Backtracking</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Search/" rel="tag">Binary Search</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bit-Manipulation/" rel="tag">Bit Manipulation</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bit-Manipylation/" rel="tag">Bit Manipylation</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Breadth-first-Search/" rel="tag">Breadth-first Search</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-first-Search/" rel="tag">Depth-first Search</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag">Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Divide-and-Conquer/" rel="tag">Divide and Conquer</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/" rel="tag">Dynamic Programming</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Greedy/" rel="tag">Greedy</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hash-Table/" rel="tag">Hash Table</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heap/" rel="tag">Heap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linked-List/" rel="tag">Linked List</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recursion/" rel="tag">Recursion</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sliding-Window/" rel="tag">Sliding Window</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/" rel="tag">Sort</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack/" rel="tag">Stack</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-Pointers/" rel="tag">Two Pointers</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Union-Find/" rel="tag">Union Find</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">65</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/" rel="tag">Backtracking</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Indexed-Tree/" rel="tag">Binary Indexed Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Search/" rel="tag">Binary Search</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bit-Manipulation/" rel="tag">Bit Manipulation</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Breadth-first-Search/" rel="tag">Breadth-first Search</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-first-Search/" rel="tag">Depth-first Search</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dequeue/" rel="tag">Dequeue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag">Design</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Divide-and-Conquer/" rel="tag">Divide and Conquer</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/" rel="tag">Dynamic Programming</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Greedy/" rel="tag">Greedy</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hash-Table/" rel="tag">Hash Table</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heap/" rel="tag">Heap</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Line-Sweep/" rel="tag">Line Sweep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linked-List/" rel="tag">Linked List</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recursion/" rel="tag">Recursion</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segment-Tree/" rel="tag">Segment Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sliding-Window/" rel="tag">Sliding Window</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/" rel="tag">Sort</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack/" rel="tag">Stack</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tire/" rel="tag">Tire</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Topological-Sort/" rel="tag">Topological Sort</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-Pointers/" rel="tag">Two Pointers</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Union-Find/" rel="tag">Union Find</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">1</span></li></ul>
           </canvas>
           </div>
       </div>
