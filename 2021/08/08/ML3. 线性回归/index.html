@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="单变量线性回归模型 线性模型   y &#x3D; wx+b+\epsilon 损失函数   L(w, b)  &#x3D; \sum_{i&#x3D;1}^{n}\left(y_{i}-w x_{i}-b\right)^{2} 目标   \left(w^{*}, b^{*}\right) &#x3D; {\arg \min_{(w, b)} } \sum_{i&#x3D;1}^{n}\left(y_{i}-w x_{i}-b\right)^{2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性回归">
+<meta property="og:url" content="http://example.com/2021/08/08/ML3.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/index.html">
+<meta property="og:site_name" content="ZhuCode">
+<meta property="og:description" content="单变量线性回归模型 线性模型   y &#x3D; wx+b+\epsilon 损失函数   L(w, b)  &#x3D; \sum_{i&#x3D;1}^{n}\left(y_{i}-w x_{i}-b\right)^{2} 目标   \left(w^{*}, b^{*}\right) &#x3D; {\arg \min_{(w, b)} } \sum_{i&#x3D;1}^{n}\left(y_{i}-w x_{i}-b\right)^{2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-08T07:54:53.003Z">
+<meta property="article:modified_time" content="2021-08-08T16:52:21.410Z">
+<meta property="article:author" content="Zhu">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="回归">
+<meta property="article:tag" content="线性回归">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/08/ML3.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>线性回归 | ZhuCode</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ZhuCode</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/08/ML3.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhuCode">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          线性回归
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-08 15:54:53" itemprop="dateCreated datePublished" datetime="2021-08-08T15:54:53+08:00">2021-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-09 00:52:21" itemprop="dateModified" datetime="2021-08-09T00:52:21+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习与深度学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="单变量线性回归"><a href="#单变量线性回归" class="headerlink" title="单变量线性回归"></a>单变量线性回归</h1><h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><ul>
+<li>线性模型</li>
+</ul>
+<script type="math/tex; mode=display">
+y = wx+b+\epsilon</script><ul>
+<li>损失函数</li>
+</ul>
+<script type="math/tex; mode=display">
+L(w, b)  = \sum_{i=1}^{n}\left(y_{i}-w x_{i}-b\right)^{2}</script><ul>
+<li>目标</li>
+</ul>
+<script type="math/tex; mode=display">
+\left(w^{*}, b^{*}\right) = {\arg \min_{(w, b)} } \sum_{i=1}^{n}\left(y_{i}-w x_{i}-b\right)^{2}</script><a id="more"></a>
+<h2 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h2><ul>
+<li>最小二乘法</li>
+</ul>
+<p>将 $L(w,b)$ 分别对 $w$ 和 $b$ 求导</p>
+<script type="math/tex; mode=display">
+\begin{aligned} 
+\frac{\partial L(w, b)}{\partial w} &=2\left(w \sum_{i=1}^{n} x_{i}^{2}-\sum_{i=1}^{n}\left(y_{i}-b\right) x_{i}\right) \\ \frac{\partial L(w, b)}{\partial b} &=2\left(n b-\sum_{i=1}^{n}\left(y_{i}-w x_{i}\right)\right) 
+\end{aligned}</script><p>令 $\frac{\partial L(w, b)}{\partial b} = 0$ ，得</p>
+<script type="math/tex; mode=display">
+b=\frac{1}{n} \sum_{i=1}^{n}\left(y_{i}-w x_{i}\right)</script><p>且已知</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\overline{x} &=  \frac{1}{n} \sum_{i=1}^{n} x_{i}\\
+\overline{y} &=  \frac{1}{n} \sum_{i=1}^{n} y_{i}
+\end{aligned}</script><p>可得</p>
+<script type="math/tex; mode=display">
+b=\overline{y}-w \overline{x}</script><p>令 $\frac{\partial L(w, b)}{\partial w} = 0$ ，得</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+0 &= w \sum_{i=1}^{n} x_{i}^{2}-\sum_{i=1}^{n}\left(y_{i}-b\right) x_{i}\\
+w \sum_{i=1}^{n} x_{i}^{2} &= \sum_{i=1}^{n} y_{i} x_{i}-\sum_{i=1}^{n} b x_{i}
+\end{aligned}</script><p>将 $b$ 代入上式</p>
+<script type="math/tex; mode=display">
+\begin{aligned} 
+w \sum_{i=1}^{n} x_{i}^{2} &= \sum_{i=1}^{n} y_{i} x_{i}-\sum_{i=1}^{n}(\overline{y}-w \overline{x}) x_{i} \\ 
+w \sum_{i=1}^{n} x_{i}^{2} &= \sum_{i=1}^{n} y_{i} x_{i}-\overline{y} \sum_{i=1}^{n} x_{i}+w \overline{x} \sum_{i=1}^{n} x_{i} \\ 
+w\left(\sum_{i=1}^{n} x_{i}^{2}-\overline{x} \sum_{i=1}^{n} x_{i}\right) &=\sum_{i=1}^{n} y_{i} x_{i}-\overline{y} \sum_{i=1}^{n} x_{i} \\ 
+w &=\frac{\sum_{i=1}^{n} y_{i} x_{i}-\overline{y} \sum_{i=1}^{n} x_{i}}{\sum_{i=1}^{n} x_{i}^{2}-\overline{x} \sum_{i=1}^{n} x_{i}} \\
+w &=\frac{\sum_{i=1}^{n} y_{i}\left(x_{i}-\overline{x}\right)}{\sum_{i=1}^{n} x_{i}^{2}-\frac{1}{n}\left(\sum_{i=1}^{n} x_{i}\right)^{2}} 
+\end{aligned}</script><p>进一步，将去均值的 $\boldsymbol{x}$ 和 $\boldsymbol{y}$ 分别表示为 $\boldsymbol{x}_d$ 和 $\boldsymbol{x}_d$，则 $w$ 还可以表示成向量的形式</p>
+<script type="math/tex; mode=display">
+\begin{aligned} 
+w &=\frac{\sum_{i=1}^{n}\left(y_{i} x_{i}-y_{i} \overline{x}-x_{i} \overline{y}+\overline{x} \overline{y}\right)}{\sum_{i=1}^{n}\left(x_{i}^{2}-x_{i} \overline{x}-x_{i} \overline{x}+\overline{x}^{2}\right)} \\ &=\frac{\sum_{i=1}^{n}\left(x_{i}-\overline{x}\right)\left(y_{i}-\overline{y}\right)}{\sum_{i=1}^{n}\left(x_{i}-\overline{x}\right)^{2}} \\
+&=\frac{\boldsymbol{x}_{d}^{T} \boldsymbol{y}_{d}}{\boldsymbol{x}_{d}^{T} \boldsymbol{x}_{d}}
+\end{aligned}</script><h1 id="多变量线性回归"><a href="#多变量线性回归" class="headerlink" title="多变量线性回归"></a>多变量线性回归</h1><h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><ul>
+<li>基本表示</li>
+</ul>
+<p>$n$ 个样本，$p$ 维，第 $i$ 个样本表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{x}_i = \left(\begin{array}{cc}{\boldsymbol{x}_{i1}} \\ {\boldsymbol{x}_{i2}}  \\ {\vdots}  \\ {\boldsymbol{x}_{ip}}\end{array}\right)</script><p>所有标签表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{y} =\left(\begin{array}{cc}{y_1} \\ {y_2}  \\ {\vdots}  \\ {y_n}\end{array}\right)</script><ul>
+<li>数据整合</li>
+</ul>
+<p>合并 $\boldsymbol{w}$ 和 $b$</p>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}=(\boldsymbol{w} ; b)</script><p>扩展数据集 $\mathbf{X}$</p>
+<script type="math/tex; mode=display">
+\mathbf{X}=\left(\begin{array}{ccccc}{x_{11}} & {x_{12}} & {\dots} & {x_{1 p}} & {1} \\ {x_{21}} & {x_{22}} & {\dots} & {x_{2 p}} & {1} \\ {\vdots} & {\vdots} & {\ddots} & {\vdots} & {\vdots} \\ {x_{n 1}} & {x_{n 2}} & {\dots} & {x_{n p}} & {1}\end{array}\right)=\left(\begin{array}{cc}{\boldsymbol{x}_{1}^{T}} & {1} \\ {\boldsymbol{x}_{2}^{T}} & {1} \\ {\vdots} & {\vdots} \\ {\boldsymbol{x}_{n}^{T}} & {1}\end{array}\right)\\</script><ul>
+<li>线性模型</li>
+</ul>
+<script type="math/tex; mode=display">
+y = \hat{\boldsymbol{w}}^T\boldsymbol{x}+\epsilon</script><ul>
+<li>损失函数</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\hat{\boldsymbol{w}}) 
+&= \sum_{i=1}^{n}(y_i-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i)^2 \\
+&= \|\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}}\|_{2}^{2} \\
+&= (\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})^{T}(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})
+\end{aligned}</script><ul>
+<li>目标</li>
+</ul>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}^{*}=\underset{\hat{\boldsymbol{w}}}{\arg \min }(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})^{T}(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})</script><h2 id="求解-1"><a href="#求解-1" class="headerlink" title="求解"></a>求解</h2><h3 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h3><p>将 $L(\hat{\boldsymbol{w}})$ 展开</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\hat{\boldsymbol{w}})
+&= (\boldsymbol{y}^T-\hat{\boldsymbol{w}}^T\mathbf{X}^T )(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})\\
+&=\boldsymbol{y}^{T} \boldsymbol{y}-\boldsymbol{y}^{T} \mathbf{X} \hat{\boldsymbol{w}}-\hat{\boldsymbol{w}}^{T} \mathbf{X}^{T} \boldsymbol{y}+\hat{\boldsymbol{w}}^{T} \mathbf{X}^{T} \mathbf{X} \hat{\boldsymbol{w}}
+\end{aligned}</script><p>将 $L(\hat{\boldsymbol{w}})$ 对 $\hat{\boldsymbol{w}}$ 求导</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial L(\hat{\boldsymbol{w}})}{\partial \hat{\boldsymbol{w}}}
+&= \frac{\partial \boldsymbol{y}^{T} \boldsymbol{y}}{\partial \hat{\boldsymbol{w}}}-\frac{\partial \boldsymbol{y}^{T} \mathbf{X} \hat{\boldsymbol{w}}}{\partial \hat{\boldsymbol{w}}}-\frac{\partial \hat{\boldsymbol{w}}^{T} \mathbf{X}^{T} \boldsymbol{y}}{\partial \hat{\boldsymbol{w}}}+\frac{\partial \hat{\boldsymbol{w}}^{T} \mathbf{X}^{T} \mathbf{X} \hat{\boldsymbol{w}}}{\partial \hat{\boldsymbol{w}}}\\
+&= 0-\mathbf{X}^{T} \boldsymbol{y}-\mathbf{X}^{T} \boldsymbol{y}+\left(\mathbf{X}^{T} \mathbf{X}+\mathbf{X}^{T} \mathbf{X}\right) \hat{w}\\
+&= 2\mathbf{X}^{T}(\mathbf{X} \hat{\boldsymbol{w}}-\boldsymbol{y})
+\end{aligned}</script><p>① 当 $\mathbf{X}^{T} \mathbf{X}$ 满秩时，令 $\frac{\partial L(\hat{\boldsymbol{w}})}{\partial \hat{\boldsymbol{w}}} = 0$ ，得</p>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}^{*}=\left(\mathbf{X}^{T} \mathbf{X}\right)^{-1} \mathbf{X}^{T} \boldsymbol{y}</script><p>② 当 $\mathbf{X}^{T} \mathbf{X}$ 不满秩时，加入 L2​ 正则项，即 Ridge 回归。</p>
+<h3 id="几何求解法"><a href="#几何求解法" class="headerlink" title="几何求解法"></a>几何求解法</h3><script type="math/tex; mode=display">
+\mathbf{X}=\left(\begin{array}{ccccc}{x_{11}} & {x_{12}} & {\dots} & {x_{1 p}} & {1} \\ {x_{21}} & {x_{22}} & {\dots} & {x_{2 p}} & {1} \\ {\vdots} & {\vdots} & {\ddots} & {\vdots} & {\vdots} \\ {x_{n 1}} & {x_{n 2}} & {\dots} & {x_{n p}} & {1}\end{array}\right)</script><p>将 $\mathbf{X}$ 按列看，则有 $p+1$ 个基，而 $\boldsymbol{y}$ 不能由 $p+1$ 个基线性表示。</p>
+<p>我们要做的是，将 $\boldsymbol{y}$ 投影在 $p+1$ 维空间中，使得该投影等于 $p+1$ 个基的线性组合 $\mathbf{X}^{T}\hat{\boldsymbol{w}}$，即求线性组合的系数 $\hat{\boldsymbol{w}}$。</p>
+<p>由投影性质，可得 $\boldsymbol{y}-\mathbf{X}^{T}\hat{\boldsymbol{w}}$ 为垂直的法向量，则有：</p>
+<script type="math/tex; mode=display">
+\mathbf{X}^{T}(\boldsymbol{y}-\mathbf{X}^{T}\hat{\boldsymbol{w}}) = 0\\</script><p>求得：</p>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}=\left(\mathbf{X}^{T} \mathbf{X}\right)^{-1} \mathbf{X}^{T} \boldsymbol{y}</script><h3 id="最大似然法-MLE"><a href="#最大似然法-MLE" class="headerlink" title="最大似然法 MLE"></a>最大似然法 MLE</h3><ul>
+<li>假设</li>
+</ul>
+<p>噪声 $\epsilon$ 符合高斯分布 $\mathcal{N}(0, \sigma^2)$，则 $y_i$ 符合高斯分布 $\mathcal{N}(\hat{\boldsymbol{w}}^T\boldsymbol{x}_i, \sigma^2)$。</p>
+<ul>
+<li>目标分布</li>
+</ul>
+<script type="math/tex; mode=display">
+P\left(y_{i} \mid \boldsymbol{x}_i, \hat{\boldsymbol{w}}\right)=\frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{\left(y_{i}-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i\right)^{2}}{2 \sigma^{2}}}</script><ul>
+<li>似然函数</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\hat{\boldsymbol{w}})
+&= \log \prod_{i=1}^{n} P\left(y_{i} \mid \boldsymbol{x}_i, \hat{\boldsymbol{w}}\right)\\
+&= \sum_{i=1}^{n} \log P\left(y_{i} \mid \boldsymbol{x}_i, \hat{\boldsymbol{w}}\right)\\
+&= \sum_{i=1}^{n} \log \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{\left(y_{i}-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i\right)^{2}}{2 \sigma^{2}}}\\
+&= n \log \frac{1}{\sqrt{2 \pi} \sigma}-\frac{1}{2 \sigma^{2}} \sum_{i=1}^{n}\left(y_{i}-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i\right)^{2}
+\end{aligned}</script><p>令 $\frac{\partial L(\hat{\boldsymbol{w}})}{\partial \hat{\boldsymbol{w}}} = 0$ ，同等于最小二乘法，得</p>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}^{*}=\left(\mathbf{X}^{T} \mathbf{X}\right)^{-1} \mathbf{X}^{T} \boldsymbol{y}</script><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLinearRegression</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.beta = <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, data, labels</span>):</span></span><br><span class="line">        n, p = data.shape</span><br><span class="line">        data = np.column_stack([data, np.ones((n, <span class="number">1</span>))])</span><br><span class="line">        xTx = np.dot(data.T, data)</span><br><span class="line">        <span class="keyword">if</span> np.linalg.det(xTx) == <span class="number">0.0</span>:</span><br><span class="line">            print(<span class="string">&quot;矩阵为奇异矩阵,不能求逆&quot;</span>)</span><br><span class="line">        self.beta = np.dot(np.mat(xTx).I, np.dot(data.T,labels))</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, data</span>):</span></span><br><span class="line">        n, p = data.shape</span><br><span class="line">        data = np.column_stack([data, np.ones((n, <span class="number">1</span>))])</span><br><span class="line">        <span class="keyword">return</span> data*self.beta</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self, data, labels</span>):</span></span><br><span class="line">        <span class="keyword">return</span> r2_score(labels, self.predict(data))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    data, labels = datasets.make_friedman1(<span class="number">1000</span>, noise=<span class="number">0.2</span>)</span><br><span class="line">    labels = labels.reshape((-<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    train_data, test_data, train_labels, test_labels = train_test_split(data, labels, test_size=<span class="number">0.3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># MyLinearRegression</span></span><br><span class="line">    clf = MyLinearRegression()</span><br><span class="line">    clf.fit(train_data, train_labels)</span><br><span class="line">    print(<span class="string">&#x27;训练集&#x27;</span>, clf.score(train_data, train_labels))</span><br><span class="line">    print(<span class="string">&#x27;测试集&#x27;</span>, clf.score(test_data, test_labels))</span><br><span class="line">    <span class="comment"># sklearn</span></span><br><span class="line">    clf = LinearRegression()</span><br><span class="line">    clf.fit(train_data, train_labels)</span><br><span class="line">    print(<span class="string">&#x27;训练集&#x27;</span>, clf.score(train_data, train_labels))</span><br><span class="line">    print(<span class="string">&#x27;测试集&#x27;</span>, clf.score(test_data, test_labels))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="Ridge"><a href="#Ridge" class="headerlink" title="Ridge"></a>Ridge</h2><ul>
+<li>目的</li>
+</ul>
+<p>解决 $\mathbf{X}^{T} \mathbf{X}$ 非满秩时，无法求逆的问题。</p>
+<ul>
+<li>损失函数</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\hat{\boldsymbol{w}}) 
+&= \sum_{i=1}^{n}\left[(y_i-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i)^2+\lambda\|\hat{\boldsymbol{w}}\|_{2}^{2}\right] \\
+&= \|\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}}\|_{2}^{2}+\lambda\|\hat{\boldsymbol{w}}\|_{2}^{2} \\
+&= (\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})^{T}(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})+\lambda\hat{\boldsymbol{w}}^T\hat{\boldsymbol{w}}
+\end{aligned}</script><ul>
+<li>目标</li>
+</ul>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}^{*} = \underset{\hat{\boldsymbol{w}}}{\arg \min }\left[(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})^{T}(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})+\lambda\hat{\boldsymbol{w}}^T\hat{\boldsymbol{w}}\right]</script><ul>
+<li>求解</li>
+</ul>
+<h3 id="最小二乘法-1"><a href="#最小二乘法-1" class="headerlink" title="最小二乘法"></a>最小二乘法</h3><p>将 $L(\hat{\boldsymbol{w}})$ 展开</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\hat{\boldsymbol{w}})
+&= (\boldsymbol{y}^T-\hat{\boldsymbol{w}}^T\mathbf{X}^T )(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})+\lambda\hat{\boldsymbol{w}}^T\hat{\boldsymbol{w}}\\
+&=\boldsymbol{y}^{T} \boldsymbol{y}-\boldsymbol{y}^{T} \mathbf{X} \hat{\boldsymbol{w}}-\hat{\boldsymbol{w}}^{T} \mathbf{X}^{T} \boldsymbol{y}+\hat{\boldsymbol{w}}^{T} \mathbf{X}^{T} \mathbf{X} \hat{\boldsymbol{w}}+\lambda\hat{\boldsymbol{w}}^T\hat{\boldsymbol{w}}
+\end{aligned}</script><p>将 $L(\hat{\boldsymbol{w}})$ 对 $\hat{\boldsymbol{w}}$ 求导</p>
+<script type="math/tex; mode=display">
+\begin{aligned}\frac{\partial L(\hat{\boldsymbol{w}})}{\partial\hat{\boldsymbol{w}}}
+&= \frac{\partial \boldsymbol{y}^{T} \boldsymbol{y}}{\partial\hat{\boldsymbol{w}}}-\frac{\partial \boldsymbol{y}^{T} \mathbf{X}\hat{\boldsymbol{w}}}{\partial \hat{\boldsymbol{w}}}-\frac{\partial\hat{\boldsymbol{w}}^{T} \mathbf{X}^{T} \boldsymbol{y}}{\partial\hat{\boldsymbol{w}}}+\frac{\partial \hat{\boldsymbol{w}}^{T} \mathbf{X}^{T} \mathbf{X} \hat{\boldsymbol{w}}}{\partial\hat{\boldsymbol{w}}}+\frac{\partial\lambda\hat{\boldsymbol{w}}^T\hat{\boldsymbol{w}}}{\partial\hat{\boldsymbol{w}}}\\
+&= 0-\mathbf{X}^{T} \boldsymbol{y}-\mathbf{X}^{T} \boldsymbol{y}+\left(\mathbf{X}^{T} \mathbf{X}+\mathbf{X}^{T} \mathbf{X}\right) \hat{w}+\lambda\hat{\boldsymbol{w}}+\lambda\hat{\boldsymbol{w}}\\
+&= 2\mathbf{X}^{T}(\mathbf{X} \hat{\boldsymbol{w}}-\boldsymbol{y})+2\lambda\hat{\boldsymbol{w}}
+\end{aligned}</script><p>令 $\frac{\partial L(\hat{\boldsymbol{w}})}{\partial \hat{\boldsymbol{w}}} = 0$ ，得</p>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}^{*}=\left(\mathbf{X}^{T} \mathbf{X}+\lambda\mathbf{I}\right)^{-1} \mathbf{X}^{T} \boldsymbol{y}</script><h3 id="最大后验估计-MAP"><a href="#最大后验估计-MAP" class="headerlink" title="最大后验估计 MAP"></a>最大后验估计 MAP</h3><ul>
+<li>假设</li>
+</ul>
+<p>噪声 $\epsilon$ 符合高斯分布 $\mathcal{N}(0, \sigma^2)$，$\hat{\boldsymbol{w}}$ 符合高斯分布 $\mathcal{N}(0, \sigma^2_0)$。</p>
+<p>在已知 $\boldsymbol{x}_i$ 和 $\hat{\boldsymbol{w}}$ 的前提下，$y_i$ 符合高斯分布 $\mathcal{N}(\hat{\boldsymbol{w}}^T\boldsymbol{x}_i, \sigma^2)$：</p>
+<script type="math/tex; mode=display">
+P\left(y_{i} \mid \boldsymbol{x}_i, \hat{\boldsymbol{w}}\right)=\frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{\left(y_{i}-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i\right)^{2}}{2 \sigma^{2}}}</script><ul>
+<li>目标分布</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(\hat{\boldsymbol{w}}\mid \boldsymbol{y}) = \frac{P(\boldsymbol{y}\mid \hat{\boldsymbol{w}})P(\hat{\boldsymbol{w}})}{P(\boldsymbol{y})}
+\end{aligned}</script><p>其中 ${P(\boldsymbol{y})}$ 是固定的分布，可省略。</p>
+<ul>
+<li>似然函数</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\hat{\boldsymbol{w}})
+&= \log P(\hat{\boldsymbol{w}}\mid \boldsymbol{y})\\
+&= \log \prod_{i=1}^{n} P\left(y_{i} \mid \boldsymbol{x}_i, \hat{\boldsymbol{w}}\right)P(\hat{\boldsymbol{w}})\\
+&= \sum_{i=1}^{n} \left(\log P\left(y_{i} \mid \boldsymbol{x}_i, \hat{\boldsymbol{w}}\right)+\log P(\hat{\boldsymbol{w}})\right)\\
+&= \sum_{i=1}^{n} \left(\log \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{\left(y_{i}-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i\right)^{2}}{2 \sigma^{2}}}+\log \frac{1}{\sqrt{2 \pi} \sigma}e^{-\frac{\hat{\boldsymbol{w}}^2}{2\sigma^2}}\right)\\
+&= n \log \frac{1}{\sqrt{2 \pi} \sigma}-\frac{1}{2 \sigma^{2}} \sum_{i=1}^{n}\left(y_{i}-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i\right)^{2}+n \log \frac{1}{\sqrt{2 \pi} \sigma}-\frac{1}{2 \sigma^{2}}\hat{\boldsymbol{w}}^2
+\end{aligned}</script><p>令 $\frac{\partial L(\hat{\boldsymbol{w}})}{\partial \hat{\boldsymbol{w}}} = 0$ ，同等于最小二乘法，得</p>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}^{*}=\left(\mathbf{X}^{T} \mathbf{X}+\lambda\mathbf{I}\right)^{-1} \mathbf{X}^{T} \boldsymbol{y}</script><h2 id="Lasso"><a href="#Lasso" class="headerlink" title="Lasso"></a>Lasso</h2><ul>
+<li>目的</li>
+</ul>
+<p>保留重要变量。</p>
+<ul>
+<li>损失函数</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\hat{\boldsymbol{w}}) 
+&= \sum_{i=1}^{n}\left[(y_i-\hat{\boldsymbol{w}}^T\boldsymbol{x}_i)^2+\lambda\|\hat{\boldsymbol{w}}\|_{1}\right] \\
+&= \|\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}}\|_{2}^{2}+\lambda\|\hat{\boldsymbol{w}}\|_{1}\\
+&= (\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})^{T}(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})+\lambda\|\hat{\boldsymbol{w}}\|_{1}
+\end{aligned}</script><ul>
+<li>目标</li>
+</ul>
+<script type="math/tex; mode=display">
+\hat{\boldsymbol{w}}^{*} = \underset{\hat{\boldsymbol{w}}}{\arg \min }\left[(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})^{T}(\boldsymbol{y}-\mathbf{X} \hat{\boldsymbol{w}})+\lambda\|\hat{\boldsymbol{w}}\|_{1}\right]</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/%E5%9B%9E%E5%BD%92/" rel="tag"># 回归</a>
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag"># 线性回归</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/08/ML2.%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="prev" title="高斯分布参数估计">
+      <i class="fa fa-chevron-left"></i> 高斯分布参数估计
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/09/ML4.%20%E5%88%86%E7%B1%BB-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" rel="next" title="分类-逻辑回归">
+      分类-逻辑回归 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">单变量线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">求解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">2.</span> <span class="nav-text">多变量线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B-1"><span class="nav-number">2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3-1"><span class="nav-number">2.2.</span> <span class="nav-text">求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">2.2.1.</span> <span class="nav-text">最小二乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E6%B1%82%E8%A7%A3%E6%B3%95"><span class="nav-number">2.2.2.</span> <span class="nav-text">几何求解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E6%B3%95-MLE"><span class="nav-number">2.2.3.</span> <span class="nav-text">最大似然法 MLE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ridge"><span class="nav-number">2.4.</span> <span class="nav-text">Ridge</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">最小二乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1-MAP"><span class="nav-number">2.4.2.</span> <span class="nav-text">最大后验估计 MAP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lasso"><span class="nav-number">2.5.</span> <span class="nav-text">Lasso</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhu"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">256</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhurboo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhurboo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhurenbo@pku.edu.cn" title="E-Mail → mailto:zhurenbo@pku.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="220" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">69</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/" rel="tag">Backtracking</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Indexed-Tree/" rel="tag">Binary Indexed Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Search/" rel="tag">Binary Search</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bit-Manipulation/" rel="tag">Bit Manipulation</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteaser/" rel="tag">Brainteaser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Breadth-first-Search/" rel="tag">Breadth-first Search</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-first-Search/" rel="tag">Depth-first Search</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dequeue/" rel="tag">Dequeue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag">Design</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Divide-and-Conquer/" rel="tag">Divide and Conquer</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/" rel="tag">Dynamic Programming</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Greedy/" rel="tag">Greedy</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hash-Table/" rel="tag">Hash Table</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heap/" rel="tag">Heap</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Line-Sweep/" rel="tag">Line Sweep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linked-List/" rel="tag">Linked List</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Minimax/" rel="tag">Minimax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recursion/" rel="tag">Recursion</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segment-Tree/" rel="tag">Segment Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sliding-Window/" rel="tag">Sliding Window</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/" rel="tag">Sort</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack/" rel="tag">Stack</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tire/" rel="tag">Tire</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Topological-Sort/" rel="tag">Topological Sort</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-Pointers/" rel="tag">Two Pointers</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Union-Find/" rel="tag">Union Find</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB/" rel="tag">k近邻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E7%B1%BB/" rel="tag">分类</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E5%BD%92/" rel="tag">回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" rel="tag">朴素贝叶斯</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90/" rel="tag">线性判别分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" rel="tag">逻辑回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a><span class="tag-list-count">1</span></li></ul>
+          </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

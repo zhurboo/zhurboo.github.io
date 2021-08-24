@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="高斯分布 一元高斯分布 $x \sim N\left(\mu, \sigma^{2}\right)$   \mathrm{P}(\mathrm{x})&#x3D;\frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right) 多元高斯分布 $X&#x3D;\left(x_{1}, x_{2}, \ldots, x_{n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高斯分布参数估计">
+<meta property="og:url" content="http://example.com/2021/08/08/ML2.%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/index.html">
+<meta property="og:site_name" content="ZhuCode">
+<meta property="og:description" content="高斯分布 一元高斯分布 $x \sim N\left(\mu, \sigma^{2}\right)$   \mathrm{P}(\mathrm{x})&#x3D;\frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right) 多元高斯分布 $X&#x3D;\left(x_{1}, x_{2}, \ldots, x_{n">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-08T07:54:50.155Z">
+<meta property="article:modified_time" content="2021-08-08T16:52:21.422Z">
+<meta property="article:author" content="Zhu">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="高斯分布">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/08/ML2.%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>高斯分布参数估计 | ZhuCode</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ZhuCode</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/08/ML2.%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhuCode">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          高斯分布参数估计
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-08 15:54:50" itemprop="dateCreated datePublished" datetime="2021-08-08T15:54:50+08:00">2021-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-09 00:52:21" itemprop="dateModified" datetime="2021-08-09T00:52:21+08:00">2021-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习与深度学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h1><ul>
+<li>一元高斯分布 $x \sim N\left(\mu, \sigma^{2}\right)$</li>
+</ul>
+<script type="math/tex; mode=display">
+\mathrm{P}(\mathrm{x})=\frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right)</script><ul>
+<li>多元高斯分布 $X=\left(x_{1}, x_{2}, \ldots, x_{n}\right)^{T}$</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathrm{P}(\mathrm{X})&=\frac{1}{\sqrt{2 \pi} \sigma_{1}} \exp \left(-\frac{\left(x_{1}-\mu_{1}\right)^{2}}{2 \sigma_{1}^{2}}\right)  \cdots \frac{1}{\sqrt{2 \pi} \sigma_{d}} \exp \left(-\frac{\left(x_{n}-\mu_{n}\right)^{2}}{2 \sigma_{n}^{2}}\right)
+\\
+&=\frac{1}{(\sqrt{2 \pi})^{n}\left(\sigma_{1} \sigma_{2} \ldots \sigma_{n}\right)} \exp \left(-\frac{1}{2} d^{2}(x, \mu, \sigma)\right)\\
+&=\frac{1}{(\sqrt{2 \pi})^{n}|\Sigma|^{\frac{1}{2}}} \exp \left(-\frac{1}{2}(X-\mu)^{T} \Sigma^{-1}(X-\mu)\right)
+\end{aligned}</script><p>其中:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+|\Sigma|^{\frac{1}{2}} &= \sigma_{1} \sigma_{2} \ldots \sigma_{n}\\
+(X-\mu)^{T} \Sigma^{-1}(X-\mu) &= d^{2}(x, \mu, \sigma)\\
+&=\left[x_{1}-\mu_{1}, \ldots, x_{n}-\mu_{n}\right]\left[\begin{array}{ccc}
+\frac{1}{\sigma_{1}^{2}} & \cdots & 0 \\
+\vdots & \ddots & \vdots \\
+0 & \cdots & \frac{1}{\sigma_{n}^{2}}
+\end{array}\right] \begin{array}{c}
+{\left[\begin{array}{c}
+x_{1}-\mu_{1}\\
+\vdots \\
+x_{d}-\mu_{n}
+\end{array}\right]} \\
+\end{array}\\
+&=\frac{\left(x_{1}-\mu_{1}\right)^{2}}{\sigma_{1}^{2}}+\frac{\left(x_{2}-\mu_{2}\right)^{2}}{\sigma_{2}^{2}}+\cdots+\frac{\left(x_{n}-\mu_{n}\right)^{2}}{\sigma_{n}^{2}} \\
+\end{aligned}</script><a id="more"></a>
+<h1 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h1><ul>
+<li>前提</li>
+</ul>
+<p>$\mathrm{X}=\left(x_{1}, x_{2}, \ldots, x_{n}\right)$ 服从参数为 $\theta=\left(\mu, \sigma^{2}\right)$ 的一元高斯分布，即 $x_{i} \sim N\left(\mu, \delta^{2}\right)$。</p>
+<ul>
+<li>最大似然</li>
+</ul>
+<p>用最大似然估计求解参数 $\theta$：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\theta_{M L E} 
+&=\arg \max _{\theta} \log P(X \mid \theta)\\
+&=\arg \max _{\theta} \log \prod_{i=1}^{n} p\left(x_{i} \mid \theta\right)
+\end{aligned}</script><p>其中，$\log P(X \mid \theta)$ 表示为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\log P(X \mid \theta)
+&=\log \prod_{i=1}^{n} p\left(x_{i} \mid \theta\right)\\
+&=\sum_{i=1}^{n} \log p\left(x_{i} \mid \theta\right) \\
+&=\sum_{i=1}^{n} \log \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(x_{i}-\mu\right)^{2}}{2 \sigma^{2}}\right) \\
+&=\sum_{i=1}^{n}\left\{\log \frac{1}{\sqrt{2 \pi}}+\log \frac{1}{\sigma}-\frac{\left(x_{i}-\mu\right)^{2}}{2 \sigma^{2}}\right\}
+\end{aligned}</script><ul>
+<li>估计 $\mu$</li>
+</ul>
+<p>$\log P(X \mid \theta)$ 对 $\mu$ 求导：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^{n}\frac{2(x_i-\mu)}{2\sigma^2} = 0\\</script><p>得：</p>
+<script type="math/tex; mode=display">
+\mu_{MLE} = \frac{1}{n}\sum_{i=1}^{n}x_i</script><p>计算 $\mu_{MLE}$ 的期望：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E(\mu_{MLE})
+&= E(\frac{1}{n}\sum_{i=1}^{n}x_i) \\
+&= \frac{1}{n}\sum_{i=1}^{n}E(x_i) \\
+&= \frac{1}{n}\sum_{i=1}^{n}\mu \\
+&= \mu
+\end{aligned}</script><p>故 $\mu_{MLE}$ 的估计是无偏的：</p>
+<script type="math/tex; mode=display">
+E(\mu) = \frac{1}{n}\sum_{i=1}^{n}x_i</script><ul>
+<li>估计 $\sigma$</li>
+</ul>
+<p>$\log P(X \mid \theta)$ 对 $\sigma$ 求导：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\sum_{i=1}^{n}\left(-\frac{1}{\sigma}+(x_i-\mu)^2\sigma^{-3}\right) &= 0\\
+\sum_{i=1}^{n}\left(-\sigma^2+(x_i-\mu)^2\right) &= 0
+\end{aligned}</script><p>得：</p>
+<script type="math/tex; mode=display">
+\sigma^2_{MLE} = \frac{1}{n}\sum_{i=1}^{n}(x_i-\mu_{MLE})^2</script><p>计算 $\sigma^2_{MLE}$ 的期望：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E\left(\sigma^2_{MLE}\right) 
+&= E\left(\frac{1}{n}\sum_{i=1}^{n}(x_i-\mu_{MLE})^2\right)\\
+&= \frac{1}{n}E\left(\sum_{i=1}^{n}(x_i^2-2x_i\mu_{MLE}+\mu_{MLE}^2)\right)\\
+&= \frac{1}{n}E\left(\sum_{i=1}^{n}x_i^2-2\sum_{i=1}^{n}x_i\mu_{MLE}+\sum_{i=1}^{n}\mu_{MLE}^2 \right)\\
+&= \frac{1}{n}E\left(\sum_{i=1}^{n}x_i^2-2\mu_{MLE}^2+\mu_{MLE}^2\right)\\
+&= E\left(\frac{1}{n}\sum_{i=1}^{n}x_i^2-\mu_{MLE}^2\right)\\
+&= E\left((\frac{1}{n}\sum_{i=1}^{n}x_i^2 - \mu^2)-(\mu_{MLE}^2-\mu^2)\right)\\
+&= E\left(\frac{1}{n}\sum_{i=1}^{n}(x_i^2-\mu^2)\right)-\left(E(\mu^2_{MLE})-E^2(\mu)\right)\\
+&= \frac{1}{n}\sum_{i=1}^{n}\left(E(x_i^2)-E^2(\mu)\right)-\left(E(\mu^2_{MLE})-E^2(\mu_{MLE})\right)\\
+&= \sigma^2-\left(E(\mu^2_{MLE})-E^2(\mu_{MLE})\right)
+\end{aligned}</script><p>其中：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E(\mu^2_{MLE})-E^2(\mu_{MLE}) 
+&= VAR(\mu_{MLE})\\
+&= VAR\left(\frac{1}{n}\sum_{i=1}^{n}x_i\right)\\
+&= \frac{1}{n^2}\sum_{i=1}^{n}VAR\left(x_i\right)\\
+&= \frac{1}{n}\sigma^2
+\end{aligned}</script><p>因此：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E\left(\sigma^2_{MLE}\right) 
+&= \sigma^2-\left(E(\mu^2_{MLE})-E^2(\mu_{MLE})\right)\\
+&= \sigma^2-\frac{1}{n}\sigma^2\\
+&= \frac{n-1}{n}\sigma^2
+\end{aligned}</script><p>故 $\sigma^2_{MLE}$ 的估计是有偏的：</p>
+<script type="math/tex; mode=display">
+E(\sigma^2) = \frac{\sum_{i-1}^{n}(x_i-\mu)^2}{n-1}</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag"># 高斯分布</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/08/ML1.%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" rel="prev" title="机器学习基础">
+      <i class="fa fa-chevron-left"></i> 机器学习基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/08/ML3.%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="next" title="线性回归">
+      线性回归 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-number">1.</span> <span class="nav-text">高斯分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">最大似然估计</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhu"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">256</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhurboo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhurboo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhurenbo@pku.edu.cn" title="E-Mail → mailto:zhurenbo@pku.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="220" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">69</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/" rel="tag">Backtracking</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Indexed-Tree/" rel="tag">Binary Indexed Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binary-Search/" rel="tag">Binary Search</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bit-Manipulation/" rel="tag">Bit Manipulation</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brainteaser/" rel="tag">Brainteaser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Breadth-first-Search/" rel="tag">Breadth-first Search</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-first-Search/" rel="tag">Depth-first Search</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dequeue/" rel="tag">Dequeue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag">Design</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Divide-and-Conquer/" rel="tag">Divide and Conquer</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dynamic-Programming/" rel="tag">Dynamic Programming</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Greedy/" rel="tag">Greedy</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hash-Table/" rel="tag">Hash Table</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Heap/" rel="tag">Heap</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Line-Sweep/" rel="tag">Line Sweep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linked-List/" rel="tag">Linked List</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Minimax/" rel="tag">Minimax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recursion/" rel="tag">Recursion</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segment-Tree/" rel="tag">Segment Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sliding-Window/" rel="tag">Sliding Window</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/" rel="tag">Sort</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stack/" rel="tag">Stack</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tire/" rel="tag">Tire</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Topological-Sort/" rel="tag">Topological Sort</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-Pointers/" rel="tag">Two Pointers</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Union-Find/" rel="tag">Union Find</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB/" rel="tag">k近邻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E7%B1%BB/" rel="tag">分类</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E5%BD%92/" rel="tag">回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" rel="tag">朴素贝叶斯</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90/" rel="tag">线性判别分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90/" rel="tag">资源</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" rel="tag">逻辑回归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a><span class="tag-list-count">1</span></li></ul>
+          </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
